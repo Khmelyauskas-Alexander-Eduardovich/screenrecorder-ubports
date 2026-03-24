@@ -19,6 +19,7 @@
 
 #include <QObject>
 #include <QPointer>
+#include <QProcess>
 #include <memory>
 #include "encoders/android_h264.h"
 #include "captures/mir.h"
@@ -29,6 +30,8 @@ class Controller : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(bool editing READ isEditing NOTIFY editingChanged)
+
 public:
     Controller();
     ~Controller();
@@ -36,16 +39,27 @@ public:
     Q_INVOKABLE void start(float scale, float framerate, bool microphoneInput);
     Q_INVOKABLE void stop();
     Q_INVOKABLE void cleanSpace();
+    Q_INVOKABLE void cutVideo(const QString path, qint64 from, qint64 to);
 
 Q_SIGNALS:
     void fileSaved(const QString path);
+    void editingChanged();
+    void editedFileSaved(const QString path);
 
 private:
+    bool isEditing();
+    void mergeVideoAndAudio();
+
     QSharedPointer<AndroidH264Encoder> m_encoder;
     QSharedPointer<CaptureMir> m_capture;
     QSharedPointer<MuxMp4> m_mux;
     ScreenRecorder m_recorder;
     QString m_fileName;
+    QString m_tmpFileName;
+    QString m_tmpWavName;
+    bool m_editing;
+    bool m_micInput;
+    QProcess m_parecord;
 };
 
 #endif // CONTROLLER_H

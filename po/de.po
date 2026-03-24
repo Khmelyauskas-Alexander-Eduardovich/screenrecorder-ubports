@@ -36,3 +36,19 @@ msgstr "Drücken um Bildschirmaufnahme zu stoppen"
 #: ../qml/Main.qml:173
 msgid "Recording will start once the app is in the background"
 msgstr "Die Aufnahme startet sobald die App im Hintergrund ist"
+
+#: ../qml/Main.qml:281
+msgid "Record microphone audio"
+msgstr "Mikrofon aufnehmen"
+
+#: ../qml/Main.qml:367
+msgid "Edit video"
+msgstr "Video bearbeiten"
+
+#: ../qml/Main.qml:486
+msgid "Delete"
+msgstr "Löschen"
+
+#: ../qml/Main.qml:493
+msgid "Save"
+msgstr "Speichern"
